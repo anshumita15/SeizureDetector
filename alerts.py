@@ -14,6 +14,8 @@ GREEN, YELLOW, RED = 22, 23, 24
  
 GPIO.setmode(GPIO.BCM)
 GPIO.setup([BUZZER, GREEN, YELLOW, RED], GPIO.OUT)
+buzzer_pwm = GPIO.PWM(BUZZER, 1000) #1000 Hz tone
+buzzer_pwm.start(0) # start silent
 GPIO.setup(BTN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
  
 # ── helpers ───────────────────────────────────────────────────────────────────
@@ -39,7 +41,7 @@ def send_alert(message: str, priority: str = "urgent"):
 def trigger_alert():
     # fire buzzer + red LED immediately
     GPIO.output(RED,    True)
-    GPIO.output(BUZZER, True)
+    buzzer_pwm.ChangeDutyCycle(50)
  
     # send push notification to caretaker's phone
     send_alert("🚨 Seizure detected. Check immediately.")
@@ -50,7 +52,7 @@ def trigger_alert():
         if GPIO.input(BTN) == GPIO.LOW:
             # button pressed — silence everything
             GPIO.output(RED,    False)
-            GPIO.output(BUZZER, False)
+            buzzer_pwm.ChangeDutyCycle(0)
             GPIO.output(GREEN,  True)   # green = acknowledged
             send_alert("✅ Alert acknowledged.", priority="low")
             return
@@ -58,5 +60,5 @@ def trigger_alert():
  
     # no acknowledgment after 60s — send escalation notification
     send_alert("⚠️ No acknowledgment after 60 seconds. Check immediately.", priority="urgent")
-    GPIO.output(BUZZER, False)
+    buzzer_pwm.ChangeDutyCycle(0)
  
