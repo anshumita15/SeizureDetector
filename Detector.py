@@ -94,7 +94,7 @@ while True:
         ratio       = band_power / total_power
         amplitude   = np.std(signal)
  
-        rhythmic = ratio > 0.2
+        rhythmic = ratio > 0.3
         strong   = amplitude > baseline_std * 5
         print(f" debug: ratio={ratio:.2f} amp={amplitude:.2f} (need ratio>0.4, amp>{baseline_std*5:.2f})")
         if rhythmic and strong:

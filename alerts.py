@@ -40,6 +40,7 @@ def send_alert(message: str, priority: str = "urgent"):
 # ── main alert function (called by detector.py) ───────────────────────────────
 def trigger_alert():
     # fire buzzer + red LED immediately
+    GPIO.output(GREEN,    False)
     GPIO.output(RED,    True)
     buzzer_pwm.ChangeDutyCycle(50)
  
