@@ -96,8 +96,9 @@ while True:
  
         rhythmic = ratio > 0.31
         strong   = amplitude > baseline_std * 5
-        print(f" debug: ratio={ratio:.2f} amp={amplitude:.2f} (need ratio>0.4, amp>{baseline_std*5:.2f})")
-        if rhythmic and strong:
+        very_strong = amplitude > baseline_std * 30 # catches vigorous non-rhytmic shaking
+        print(f" debug: ratio={ratio:.2f} amp={amplitude:.2f} (need ratio>0.31, amp>{baseline_std*5:.2f})")
+        if (rhythmic and strong) or very_strong:
             seizure_seconds += 1
             status = "WARNING" if seizure_seconds < SEIZURE_CONFIRM_SEC else "SEIZURE"
             print(f"⚠️  Possible seizure ({seizure_seconds}s) "
