@@ -41,3 +41,4 @@ def trigger_alert():
     # No ack — escalate
     send_sms("⚠️ No acknowledgment received. Escalating.")
     GPIO.output(BUZZER, False)  # stop buzzer eventually
+# end of alerts.py
