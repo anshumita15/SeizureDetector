@@ -1,11 +1,14 @@
 from twilio.rest import Client
 import RPi.GPIO as GPIO
 import time
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
-ACCOUNT_SID = "your_sid_here"
-AUTH_TOKEN = "your_token_here"
-FROM_NUMBER = "+1xxxxxxxxxx"
-TO_NUMBERS = ["+1yyyyyyyyyy"]
+ACCOUNT_SID = os.getenv("TWILIO_ACCOUNT_SID")
+AUTH_TOKEN = os.getenv("TWILIO_AUTH_TOKEN")
+FROM_NUMBER = os.getenv("TWILIO_FROM_NUMBER")
+TO_NUMBERS = os.getenv("TWILIO_TO_NUMBERS", "").split(",") 
 
 BUZZER = 17
 BTN = 27
