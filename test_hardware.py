@@ -25,11 +25,11 @@ print("Press the acknowledge button within 10 seconds...")
 start = time.time()
 while time.time() - start < 10:
     if GPIO.input(BTN) == GPIO.LOW:
-        print("✅ Button press detected!")
+        print("Button press detected!")
         break
     time.sleep(0.1)
 else:
-    print("❌ No button press detected")
+    print("No button press detected")
 
 GPIO.cleanup()
 print("Test complete.")
