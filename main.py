@@ -2,7 +2,7 @@ import subprocess, signal, sys
 
 print("🌙 Starting SeizureGuard...")
 dashboard = subprocess.Popen(["python3", "dashboard.py"])
-detector  = subprocess.Popen(["python3", "detector.py"])
+detector  = subprocess.Popen(["python3", "Detector.py"])
 
 def shutdown(*_):
     print("\nShutting down...")
