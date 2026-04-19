@@ -96,7 +96,7 @@ while True:
  
         rhythmic = ratio > 0.4
         strong   = amplitude > baseline_std * 5
- 
+        print(f" debug: ratio={ratio:.2f} amp={amplitude:.2f} (need ratio>0.4, amp>{baseline_std*5:.2f})")
         if rhythmic and strong:
             seizure_seconds += 1
             status = "WARNING" if seizure_seconds < SEIZURE_CONFIRM_SEC else "SEIZURE"
